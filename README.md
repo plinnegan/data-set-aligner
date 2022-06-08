@@ -1,45 +1,27 @@
+# Data Set Aligner
+
+The web app aims to simplify the process of aligning similar data sets between servers as often happens when an implementation has a main server and multiple country servers. In this case the configuration on the country servers may differ slightly from the central instance, but they still wish to align the two systems to facilitate data transfer.
+
+This application allows for an interactive way of aligning data sets and data element disaggregations, supporting many to one mappings as well as an auto suggested mapping feature implementing fusejs so that slight differences in DE and COC names can still be aligned automatically. This auto matching has a tunable threshold on what should be considered a match to support mapping as many items as possible without auto mapping items incorrectly.
+
+The app supports saving these mappings to the data store so they can be used as input for data transfer scripts.
+
+## Required setup
+
+The application uses personal access tokens to allow connection to other servers, so to connect to server B from server A the following configuration is required.
+
+- Server B enables PAT in dhis.conf via the property: enable.api_token.authentication = on
+- Server B adds server A url to the CORS whiltelist in the System Settings app
+- Server B created a PAT with metadata view only access to the required data sets, data elements and category which need to be mapped
+
+If this setup is completed on multiple servers, then server A can be used as the central server to create and manage the mappings to the other servers.
+
+### Future aims
+
+- View, edit and load existing mappings
+- Use the mappings to generate indicators which export the data in the mapped form for import to facilitate the data transfer
+- Customisable many to one aggregation types
+
+
 This project was bootstrapped with [DHIS2 Application Platform](https://github.com/dhis2/app-platform).
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `yarn start`
-
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner and runs all available tests found in `/src`.<br />
-
-See the section about [running tests](https://platform.dhis2.nu/#/scripts/test) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-A deployable `.zip` file can be found in `build/bundle`!
-
-See the section about [building](https://platform.dhis2.nu/#/scripts/build) for more information.
-
-### `yarn deploy`
-
-Deploys the built app in the `build` folder to a running DHIS2 instance.<br />
-This command will prompt you to enter a server URL as well as the username and password of a DHIS2 user with the App Management authority.<br/>
-You must run `yarn build` before running `yarn deploy`.<br />
-
-See the section about [deploying](https://platform.dhis2.nu/#/scripts/deploy) for more information.
-
-## Learn More
-
-You can learn more about the platform in the [DHIS2 Application Platform Documentation](https://platform.dhis2.nu/).
-
-You can learn more about the runtime in the [DHIS2 Application Runtime Documentation](https://runtime.dhis2.nu/).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
